@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,10 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#2B3440">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F5F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1B222B" media="(prefers-color-scheme: dark)">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BOIA Freight">
 <meta property="og:description" content="One platform from quote to paid. Dispatch, documents, fuel and settlement in one system, priced per truck.">
@@ -346,6 +349,80 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
 .fleet{display:block; width:100%; height:auto; margin:40px 0 0}
 .fleet-cap{font-size:14.5px; color:var(--ink-faint); margin:10px 0 0}
 
+/* ---------- polish: transitions, balance ---------- */
+h1,h2,h3{text-wrap:balance}
+.btn{transition:background .15s, border-color .15s, color .15s, transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.hnav a, footer a, .sheet-card a, .mailto{transition:color .15s}
+.tool{transition:background .15s}
+.sheet-card{transition:transform .2s, border-color .2s, box-shadow .2s}
+.sheet-card:hover{transform:translateY(-3px); border-color:var(--ink-faint); box-shadow:0 18px 40px -28px rgba(43,52,64,.45)}
+.sheet-card .num{display:flex; justify-content:space-between; align-items:center}
+.sheet-card .num .ico{width:20px; height:20px; color:var(--ink-faint)}
+
+/* ---------- header: scrolled state, theme toggle, mobile menu ---------- */
+header{transition:box-shadow .2s, background .2s}
+header.scrolled{background:color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  box-shadow:0 10px 30px -22px rgba(0,0,0,.4)}
+header.open{background:var(--bg)}
+.theme-btn,.menu-btn{background:none; border:1px solid var(--rule); color:var(--ink-soft); width:38px; height:38px;
+  display:inline-flex; align-items:center; justify-content:center; cursor:pointer; border-radius:2px; padding:0;
+  transition:color .15s, border-color .15s}
+.theme-btn:hover,.menu-btn:hover{color:var(--ink); border-color:var(--ink-soft)}
+.theme-btn .ico{width:18px; height:18px}
+.theme-btn .i-sun{display:none}
+:root[data-theme="dark"] .theme-btn .i-sun{display:block}
+:root[data-theme="dark"] .theme-btn .i-moon{display:none}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .theme-btn .i-sun{display:block}
+  :root:not([data-theme="light"]) .theme-btn .i-moon{display:none}
+}
+.menu-btn{display:none; flex-direction:column; gap:5px}
+.menu-btn span{display:block; width:16px; height:2px; background:currentColor; transition:transform .2s}
+header.open .menu-btn span:first-child{transform:translateY(3.5px) rotate(45deg)}
+header.open .menu-btn span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.mnav{display:none; flex-direction:column; border-top:1px solid var(--rule); padding:6px 24px 14px}
+.mnav a{padding:13px 0; text-decoration:none; font-size:17px; color:var(--ink); border-bottom:1px solid var(--rule)}
+.mnav a:last-child{border-bottom:none; color:var(--blue); font-weight:600}
+@media(max-width:760px){
+  .menu-btn{display:inline-flex}
+  header.open .mnav{display:flex}
+  .hnav{gap:10px}
+  .hbar{padding:12px 24px}
+  .hnav .btn{white-space:nowrap; padding:9px 12px}
+}
+@media(max-width:480px){
+  .hnav .btn{display:none}
+  .mock-toast{position:static; margin-top:12px}
+  .mock{overflow:hidden}
+}
+@media(max-width:600px){ h2 br{display:none} }
+
+/* ---------- scroll reveal ---------- */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.75,.25,1);
+  transition-delay:calc(var(--i,0) * 55ms)}
+.reveal.in{opacity:1; transform:none}
+@media(prefers-reduced-motion:reduce){ .reveal{opacity:1; transform:none; transition:none} }
+
+/* ---------- hero mockup motion ---------- */
+@media(prefers-reduced-motion:no-preference){
+  .mock-row.is-live .prog i{animation:prog 1600ms cubic-bezier(.2,.75,.25,1) 700ms both}
+  .mock-toast{animation:toast 520ms cubic-bezier(.2,.75,.25,1) 1700ms both}
+}
+@keyframes prog{ from{width:46%} to{width:var(--p)} }
+@keyframes toast{ from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
+
+/* ---------- surface band ---------- */
+section.band{background:var(--surface)}
+.band .mock,.band .roi-item{background:var(--bg)}
+.band .chip{background:var(--surface)}
+
+/* ---------- footer ---------- */
+.fnav{display:flex; flex-wrap:wrap; gap:6px 20px}
+footer a:hover{color:var(--ink)}
+.fsub{margin-top:18px; padding-top:18px; border-top:1px solid var(--rule)}
+
 @media print{
   @page{margin:14mm}
   body{background:#fff; color:#2B3440; font-size:11pt}
@@ -387,6 +464,8 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
   <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></symbol>
   <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15.5" r="4.5"/><path d="M11.3 12.2L20 3.5"/><path d="M16.5 7l3 3"/></symbol>
   <symbol id="i-toggle" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="16" cy="12" r="3"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
   <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></symbol>
   <symbol id="il-truck" viewBox="0 0 180 66">
     <rect x="0" y="0" width="122" height="50" rx="3" class="il-ink"/>
@@ -424,8 +503,18 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
       <a href="#platform" class="hide-sm">Platform</a>
       <a href="#returns" class="hide-sm">Returns</a>
       <a href="#sheets" class="hide-sm">Tech sheets</a>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark mode"><svg class="ico i-moon"><use href="#i-moon"/></svg><svg class="ico i-sun"><use href="#i-sun"/></svg></button>
       <a href="#demo" class="btn btn-primary btn-sm">Book a demo</a>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span></button>
     </nav>
+  </div>
+  <div class="mnav" id="mnav">
+    <a href="#platform">Platform</a>
+    <a href="#people">People</a>
+    <a href="#returns">Returns</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#sheets">Tech sheets</a>
+    <a href="#demo">Book a demo</a>
   </div>
 </header>
 
@@ -581,7 +670,7 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
 
 <div class="cut" style="--pos:22%"></div>
 
-<section id="returns">
+<section id="returns" class="band">
   <div class="wrap">
     <h2>Cost per mile, and how to move it.</h2>
     <p class="lead">Most fleets calculate cost per mile once a quarter from numbers that are already stale. Here it's current, it's per load, and it tells you what to do differently next week.</p>
@@ -646,25 +735,25 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
     <p class="lead">One page each. Open, read, or save as PDF.</p>
     <div class="sheets">
       <div class="sheet-card">
-        <div class="num">01</div>
+        <div class="num">01<svg class="ico"><use href="#i-ledger"/></svg></div>
         <h3>Platform overview</h3>
         <p>What the platform covers, what it replaces, and where it fits alongside what you already run.</p>
         <a href="#sheet-overview">Open sheet</a>
       </div>
       <div class="sheet-card">
-        <div class="num">02</div>
+        <div class="num">02<svg class="ico"><use href="#i-ledger"/></svg></div>
         <h3>How a load moves</h3>
         <p>Every trigger point from booking to settlement, and what happens without anyone touching it.</p>
         <a href="#sheet-workflow">Open sheet</a>
       </div>
       <div class="sheet-card">
-        <div class="num">03</div>
+        <div class="num">03<svg class="ico"><use href="#i-ledger"/></svg></div>
         <h3>Getting started</h3>
         <p>What the first 30 days look like, what we need from you, and how you run both systems safely during cutover.</p>
         <a href="#sheet-cutover">Open sheet</a>
       </div>
       <div class="sheet-card">
-        <div class="num">04</div>
+        <div class="num">04<svg class="ico"><use href="#i-ledger"/></svg></div>
         <h3>Where the return comes from</h3>
         <p>The cost-per-mile math, the line items it moves, and how to check it against your own numbers.</p>
         <a href="#sheet-roi">Open sheet</a>
@@ -687,15 +776,28 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
 </section>
 
 <footer>
-  <div class="wrap fbar">
-    <span class="brand">
-      <svg class="mark" style="width:24px;height:24px" aria-hidden="true"><use href="#i-mark"/></svg>
-    <span class="wordmark" style="--wm-size:19px">
-      <span class="wm-main">BOIA<span class="wm-mark"></span></span>
-      <span class="wm-sub">FREIGHT</span>
-    </span>
-    </span>
-    <span><a href="mailto:brian@boia.solutions">brian@boia.solutions</a> &nbsp;·&nbsp; boiafreight.com</span>
+  <div class="wrap">
+    <div class="fbar">
+      <span class="brand">
+        <svg class="mark" style="width:24px;height:24px" aria-hidden="true"><use href="#i-mark"/></svg>
+        <span class="wordmark" style="--wm-size:19px">
+          <span class="wm-main">BOIA<span class="wm-mark"></span></span>
+          <span class="wm-sub">FREIGHT</span>
+        </span>
+      </span>
+      <nav class="fnav" aria-label="Footer">
+        <a href="#platform">Platform</a>
+        <a href="#people">People</a>
+        <a href="#returns">Returns</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#sheets">Tech sheets</a>
+        <a href="#demo">Book a demo</a>
+      </nav>
+    </div>
+    <div class="fbar fsub">
+      <span>One platform, quote to paid. Built for carriers running 3 to 100 trucks.</span>
+      <span><a href="mailto:brian@boia.solutions">brian@boia.solutions</a> &nbsp;·&nbsp; boiafreight.com</span>
+    </div>
   </div>
 </footer>
 
@@ -969,6 +1071,60 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
 
   window.addEventListener('hashchange', route);
   route();
+
+  /* theme toggle */
+  var root = document.documentElement, tb = document.getElementById('theme-btn');
+  function isDark(){
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function themeLabel(){ tb.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode'); }
+  tb.addEventListener('click', function(){
+    var d = !isDark();
+    root.setAttribute('data-theme', d ? 'dark' : 'light');
+    try { localStorage.setItem('theme', d ? 'dark' : 'light'); } catch(e){}
+    themeLabel();
+  });
+  themeLabel();
+
+  /* mobile menu */
+  var hdr = document.querySelector('header'), mb = document.getElementById('menu-btn');
+  function closeMenu(){ hdr.classList.remove('open'); mb.setAttribute('aria-expanded','false'); mb.setAttribute('aria-label','Open menu'); }
+  mb.addEventListener('click', function(){
+    var open = !hdr.classList.contains('open');
+    hdr.classList.toggle('open', open);
+    mb.setAttribute('aria-expanded', String(open));
+    mb.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  var mlinks = document.querySelectorAll('#mnav a');
+  for (var j=0;j<mlinks.length;j++) mlinks[j].addEventListener('click', closeMenu);
+  window.addEventListener('hashchange', closeMenu);
+
+  /* header lifts once the page scrolls */
+  function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* scroll reveal */
+  var targets = [];
+  var wraps = document.querySelectorAll('.sitebody section:not(.hero) > .wrap');
+  for (var w=0; w<wraps.length; w++){ wraps[w].classList.add('reveal'); targets.push(wraps[w]); }
+  var groups = document.querySelectorAll('.stack, .lane-steps, .roi, .sheets, .price-band, .rows');
+  for (var g=0; g<groups.length; g++){
+    var kids = groups[g].children;
+    for (var k=0; k<kids.length; k++){ kids[k].classList.add('reveal'); kids[k].style.setProperty('--i', k); targets.push(kids[k]); }
+  }
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      for (var e=0; e<entries.length; e++){
+        if (entries[e].isIntersecting){ entries[e].target.classList.add('in'); io.unobserve(entries[e].target); }
+      }
+    }, {threshold:0.08, rootMargin:'0px 0px -6% 0px'});
+    for (var t=0; t<targets.length; t++) io.observe(targets[t]);
+  } else {
+    for (var u=0; u<targets.length; u++) targets[u].classList.add('in');
+  }
 })();
 </script>
 </body>

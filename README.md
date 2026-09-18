@@ -13,7 +13,11 @@ no build step, no dependencies, no framework.
 - `assets/` — favicon.svg, apple-touch-icon.png, icon-192/512.png, og.png
   (social card), plus the brand lockups from the kit for reuse
 - `amplify.yml` — AWS Amplify build config (no build, just deploy)
+- `customHttp.yml` — Amplify response headers (HSTS, nosniff, asset caching)
 - `404.html` — redirects stray paths back to the site
+
+Site files live at the repo root so Amplify's `baseDirectory: /` picks them up
+directly. Don't nest them in a subfolder.
 
 ## Brand
 
@@ -58,6 +62,9 @@ Open `index.html` in a browser, or:
 - Scheduling embed — paste the Cal.com or Calendly snippet into the
   `#calendar-embed` div in the demo section and remove `display:none`.
 - Analytics — add the Plausible script tag before `</head>`.
+- Proof line — a short customer, fleet-size or founder note under the hero.
+- Product screenshots — replace the CSS mockups in the hero and People
+  sections once real UI exists.
 - Pricing page — intentionally left off.
 
 ## Contact
