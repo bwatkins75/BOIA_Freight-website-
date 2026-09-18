@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOIA Freight</title>
+<meta name="description" content="One platform from quote to paid. Dispatch, documents, fuel and settlement in one system, priced per truck.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --slate:#2B3440;
+  --blue:#2F7BFF;
+  --bg:#F5F6F7;
+  --surface:#FFFFFF;
+  --ink:#2B3440;
+  --ink-soft:#616C7A;
+  --ink-faint:#98A1AC;
+  --rule:#D9DDE2;
+  --cut:var(--bg);
+  --maxw:1080px;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B222B; --surface:#232C37; --ink:#EEF1F4; --ink-soft:#A8B2BE;
+    --ink-faint:#78838F; --rule:#37424F; --cut:var(--bg);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1B222B; --surface:#232C37; --ink:#EEF1F4; --ink-soft:#A8B2BE;
+  --ink-faint:#78838F; --rule:#37424F; --cut:var(--bg);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:17px; line-height:1.6; font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue); outline-offset:3px; border-radius:2px}
+
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+
+/* ---------- wordmark: the lane cut ---------- */
+.wordmark{display:inline-flex; align-items:baseline; gap:.42em; line-height:1; user-select:none}
+.wm-main{position:relative; display:inline-block; font-weight:900; letter-spacing:-.035em;
+  font-size:var(--wm-size,26px); color:var(--ink)}
+.wm-main::after{content:""; position:absolute; left:-2%; width:104%; height:.11em;
+  top:50%; transform:translateY(-50%); background:var(--cut)}
+.wm-mark{position:absolute; top:50%; transform:translateY(-50%);
+  left:29%; width:.16em; height:.11em; background:var(--blue); z-index:2}
+.wm-sub{font-weight:500; font-size:calc(var(--wm-size,26px)*.3);
+  letter-spacing:.34em; color:var(--ink-soft); margin-left:.1em}
+
+/* ---------- header ---------- */
+header{position:sticky; top:0; z-index:50; background:var(--bg);
+  border-bottom:1px solid var(--rule)}
+.hbar{display:flex; align-items:center; justify-content:space-between;
+  max-width:var(--maxw); margin:0 auto; padding:16px 24px}
+.hnav{display:flex; align-items:center; gap:28px; font-size:15px; color:var(--ink-soft)}
+.hnav a{text-decoration:none}
+.hnav a:hover{color:var(--ink)}
+@media(max-width:760px){ .hnav .hide-sm{display:none} }
+
+/* ---------- buttons ---------- */
+.btn{display:inline-block; padding:13px 24px; border-radius:2px; font-weight:600;
+  font-size:16px; text-decoration:none; border:1px solid transparent; cursor:pointer}
+.btn-primary{background:var(--blue); color:#fff}
+.btn-primary:hover{background:#1F6AF0}
+.btn-ghost{border-color:var(--rule); color:var(--ink); background:transparent}
+.btn-ghost:hover{border-color:var(--ink-soft)}
+.btn-sm{padding:9px 16px; font-size:14px}
+
+/* ---------- lane cut divider ---------- */
+.cut{position:relative; height:1px; background:var(--rule); margin:0;
+  max-width:var(--maxw); margin-left:auto; margin-right:auto}
+.cut::after{content:""; position:absolute; top:-4px; width:9px; height:9px;
+  background:var(--blue); left:var(--pos,12%)}
+
+/* ---------- sections ---------- */
+section{padding:88px 0}
+.eyebrow{font-size:15px; color:var(--blue); font-weight:600; margin:0 0 14px}
+h1{font-weight:900; letter-spacing:-.04em; line-height:1.02; margin:0;
+  font-size:clamp(42px,8.4vw,88px)}
+h2{font-weight:900; letter-spacing:-.03em; line-height:1.08; margin:0 0 20px;
+  font-size:clamp(30px,4.6vw,46px)}
+h3{font-weight:600; font-size:19px; letter-spacing:-.01em; margin:0 0 8px}
+p{margin:0 0 18px; max-width:64ch}
+.lead{font-size:clamp(18px,2.2vw,21px); color:var(--ink-soft); max-width:56ch}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(64px,11vw,128px) 0 clamp(56px,8vw,96px)}
+.hero h1{position:relative; display:inline-block}
+.hero h1 .slice{position:absolute; left:-1%; top:50%; transform:translateY(-50%);
+  height:.085em; width:0; background:var(--bg); z-index:2}
+.hero h1 .slice-mark{position:absolute; right:0; top:0; bottom:0; width:.2em; background:var(--blue)}
+.hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:34px}
+.hero-note{margin-top:22px; font-size:15px; color:var(--ink-faint)}
+@media(prefers-reduced-motion:no-preference){
+  .hero h1 .slice{animation:slice 1100ms cubic-bezier(.2,.75,.25,1) 260ms forwards}
+}
+@keyframes slice{ from{width:0} to{width:102%} }
+@media(prefers-reduced-motion:reduce){ .hero h1 .slice{width:102%} }
+
+/* ---------- the stack ---------- */
+.stack{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px; background:var(--rule); border:1px solid var(--rule); margin:34px 0 0}
+.tool{background:var(--surface); padding:22px 18px}
+.tool b{display:block; font-weight:600; font-size:16px; margin-bottom:3px}
+.tool span{font-size:14px; color:var(--ink-faint); line-height:1.45; display:block}
+.gluebar{background:var(--surface); border:1px solid var(--rule); border-top:none;
+  padding:20px 18px; font-size:15px; color:var(--ink-soft)}
+.gluebar b{color:var(--ink); font-weight:600}
+
+/* ---------- the lane ---------- */
+.lane{margin:40px 0 0; position:relative}
+.lane-line{position:absolute; left:0; right:0; top:15px; height:2px; background:var(--rule)}
+.lane-steps{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; position:relative}
+.step .dot{width:12px; height:12px; background:var(--blue); margin:9px 0 18px; position:relative; z-index:2}
+.step b{display:block; font-weight:600; font-size:16px; margin-bottom:5px}
+.step span{font-size:14.5px; color:var(--ink-soft); line-height:1.5}
+@media(max-width:860px){
+  .lane-steps{grid-template-columns:1fr; gap:0}
+  .lane-line{left:5px; right:auto; top:0; bottom:0; width:2px; height:auto}
+  .step{padding:0 0 26px 30px; position:relative}
+  .step .dot{position:absolute; left:0; top:6px; margin:0}
+}
+
+/* ---------- feature rows ---------- */
+.rows{margin-top:34px; border-top:1px solid var(--rule)}
+.row{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.5fr); gap:32px;
+  padding:26px 0; border-bottom:1px solid var(--rule)}
+.row p{margin:0; color:var(--ink-soft); font-size:16.5px}
+@media(max-width:760px){ .row{grid-template-columns:1fr; gap:8px} }
+
+/* ---------- roi ---------- */
+.roi{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); margin-top:34px}
+.roi-item{background:var(--surface); padding:26px 22px}
+.roi-item b{display:block; font-weight:600; margin-bottom:7px; font-size:16.5px}
+.roi-item span{font-size:15px; color:var(--ink-soft); line-height:1.55}
+.payback{margin-top:26px; padding:24px 26px; background:var(--slate); color:#EEF1F4;
+  font-size:clamp(18px,2.4vw,22px); font-weight:500; line-height:1.4; max-width:62ch}
+.payback em{font-style:normal; color:#8FB8FF}
+
+/* ---------- pricing ---------- */
+.price-band{display:flex; flex-wrap:wrap; gap:28px; margin-top:30px}
+.price-band div{flex:1 1 200px}
+.price-band b{display:block; font-weight:600; margin-bottom:6px}
+.price-band span{color:var(--ink-soft); font-size:15.5px}
+
+/* ---------- sheets ---------- */
+.sheets{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:34px}
+.sheet-card{background:var(--surface); border:1px solid var(--rule); padding:24px 22px;
+  display:flex; flex-direction:column}
+.sheet-card .num{font-weight:900; font-size:15px; color:var(--blue); margin-bottom:12px}
+.sheet-card p{font-size:15px; color:var(--ink-soft); flex:1; margin-bottom:18px}
+.sheet-card a{font-size:15px; font-weight:600; color:var(--blue); text-decoration:none}
+.sheet-card a:hover{text-decoration:underline}
+
+/* ---------- demo ---------- */
+.demo{background:var(--slate); color:#EEF1F4}
+.demo h2{color:#fff}
+.demo p{color:#B6C0CC}
+.demo .wm-main{color:#fff}
+.demo-box{margin-top:30px; border:1px dashed #4B5866; padding:30px; text-align:center;
+  color:#8E99A6; font-size:15px}
+.mailto{font-weight:600; color:#8FB8FF; text-decoration:none; font-size:18px}
+
+footer{padding:34px 0; border-top:1px solid var(--rule); font-size:14px; color:var(--ink-faint)}
+.fbar{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px}
+footer a{text-decoration:none}
+
+/* ================= SHEET VIEWS ================= */
+.sheetview{display:none}
+body.sheet-mode .sitebody{display:none}
+body.sheet-mode .sheetview.active{display:block}
+.sheetbar{position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--rule);
+  padding:14px 24px; display:flex; justify-content:space-between; align-items:center; gap:12px;
+  flex-wrap:wrap}
+.sheetbar a{font-size:15px; text-decoration:none; color:var(--ink-soft)}
+
+.page{max-width:840px; margin:0 auto; padding:44px 24px 80px}
+.sheet-head{display:flex; justify-content:space-between; align-items:flex-end;
+  border-bottom:2px solid var(--slate); padding-bottom:14px; gap:16px; flex-wrap:wrap}
+.sheet-head .t{font-weight:900; font-size:27px; letter-spacing:-.03em; line-height:1.1}
+.sheet-head .k{font-size:13px; color:var(--ink-faint)}
+.sheet-intro{font-size:17px; color:var(--ink-soft); margin:20px 0 26px; max-width:68ch}
+.sheet h4{font-weight:900; font-size:15px; margin:26px 0 10px; letter-spacing:-.01em}
+.sheet ul{margin:0 0 14px; padding-left:18px}
+.sheet li{margin-bottom:7px; font-size:15.5px; color:var(--ink-soft); line-height:1.5}
+.sheet li b{color:var(--ink); font-weight:600}
+.twocol{display:grid; grid-template-columns:1fr 1fr; gap:28px}
+@media(max-width:700px){ .twocol{grid-template-columns:1fr; gap:0} }
+.sheet-foot{margin-top:34px; padding-top:14px; border-top:1px solid var(--rule);
+  font-size:13px; color:var(--ink-faint); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+
+/* flow diagram for sheet 2 */
+.flow{margin:8px 0 18px; border:1px solid var(--rule)}
+.flow-r{display:grid; grid-template-columns:118px 1fr 1fr; border-bottom:1px solid var(--rule)}
+.flow-r:last-child{border-bottom:none}
+.flow-r>div{padding:13px 14px; font-size:14.5px; border-right:1px solid var(--rule)}
+.flow-r>div:last-child{border-right:none}
+.flow-h{background:var(--slate); color:#fff; font-weight:600; font-size:13.5px}
+.flow-h>div{color:#fff}
+.flow-when{font-weight:600}
+.flow-auto{color:var(--blue); font-weight:500}
+@media(max-width:700px){
+  .flow-r{grid-template-columns:1fr}
+  .flow-r>div{border-right:none; border-bottom:1px solid var(--rule)}
+  .flow-r>div:last-child{border-bottom:none}
+  .flow-h{display:none}
+}
+
+table.tbl{width:100%; border-collapse:collapse; font-size:15px; margin:6px 0 16px}
+table.tbl th{text-align:left; font-weight:600; font-size:13.5px; color:var(--ink-faint);
+  border-bottom:1px solid var(--rule); padding:8px 10px 8px 0}
+table.tbl td{padding:9px 10px 9px 0; border-bottom:1px solid var(--rule); color:var(--ink-soft)}
+table.tbl td:first-child{color:var(--ink); font-weight:500}
+
+@media print{
+  @page{margin:14mm}
+  body{background:#fff; color:#2B3440; font-size:11pt}
+  :root{--bg:#fff; --surface:#fff; --ink:#2B3440; --ink-soft:#4C5663; --ink-faint:#7A8492; --rule:#C9CFD6; --cut:#fff}
+  .sheetbar, header, .sitebody{display:none !important}
+  .sheetview.active{display:block !important}
+  .page{padding:0; max-width:none}
+  .sheet-head .t{font-size:22pt}
+  .sheet li{font-size:10.5pt}
+  .flow-h{background:#2B3440 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+  .wm-mark{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SITE ============ -->
+<div class="sitebody">
+
+<header>
+  <div class="hbar">
+    <a href="#top" style="text-decoration:none">
+      <span class="wordmark" style="--wm-size:24px">
+        <span class="wm-main">BOIA<span class="wm-mark"></span></span>
+        <span class="wm-sub">FREIGHT</span>
+      </span>
+    </a>
+    <nav class="hnav">
+      <a href="#platform" class="hide-sm">Platform</a>
+      <a href="#returns" class="hide-sm">Returns</a>
+      <a href="#sheets" class="hide-sm">Tech sheets</a>
+      <a href="#demo" class="btn btn-primary btn-sm">Book a demo</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>One platform,<br>quote to paid.<span class="slice"><span class="slice-mark"></span></span></h1>
+    <p class="lead" style="margin-top:28px">Most small fleets run on five systems and a spreadsheet. BOIA Freight replaces the stack — dispatch, documents, fuel and settlement in one place, priced per truck.</p>
+    <div class="hero-actions">
+      <a href="#demo" class="btn btn-primary">Book a demo</a>
+      <a href="#sheets" class="btn btn-ghost">Read the tech sheets</a>
+    </div>
+    <p class="hero-note">Built for carriers running 3 to 100 trucks.</p>
+  </div>
+</section>
+
+<div class="cut" style="--pos:14%"></div>
+
+<section id="problem">
+  <div class="wrap">
+    <h2>The tools aren't the problem.<br>The gaps between them are.</h2>
+    <p class="lead">Your TMS dispatches well. It doesn't handle documents, so you added scanning. Fuel lives in the card portal. Billing sits in accounting. Tracking is in the ELD. And everything that falls between them lives in a spreadsheet only one person really understands.</p>
+
+    <div class="stack">
+      <div class="tool"><b>TMS</b><span>Loads and dispatch</span></div>
+      <div class="tool"><b>ELD</b><span>Hours and location</span></div>
+      <div class="tool"><b>Scanning app</b><span>BOLs and PODs</span></div>
+      <div class="tool"><b>Fuel card portal</b><span>Receipts and spend</span></div>
+      <div class="tool"><b>Accounting</b><span>Invoices and pay</span></div>
+    </div>
+    <div class="gluebar"><b>And the spreadsheet</b> — where rates, margins, detention and everything unaccounted for actually get tracked. Every handoff between these is a person retyping something that already exists.</div>
+  </div>
+</section>
+
+<div class="cut" style="--pos:38%"></div>
+
+<section id="platform">
+  <div class="wrap">
+    <h2>A load moves once, through one system.</h2>
+    <p class="lead">Each step starts the next one on its own. A truck crossing a geofence tells the receiver it's close. A signed bill of lading at the dock starts the invoice. Nothing gets rekeyed, because nothing leaves the platform.</p>
+
+    <div class="lane">
+      <div class="lane-line"></div>
+      <div class="lane-steps">
+        <div class="step"><div class="dot"></div><b>Quote</b><span>Rate the load against your real cost, not a guess.</span></div>
+        <div class="step"><div class="dot"></div><b>Dispatch</b><span>Assign the right truck and driver for the lane.</span></div>
+        <div class="step"><div class="dot"></div><b>Track</b><span>Live location from the ELD you already run.</span></div>
+        <div class="step"><div class="dot"></div><b>Capture</b><span>Photos and paperwork checked at the dock.</span></div>
+        <div class="step"><div class="dot"></div><b>Invoice</b><span>Packet assembles itself and goes out same day.</span></div>
+        <div class="step"><div class="dot"></div><b>Settle</b><span>Payment tracked to the load that earned it.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cut" style="--pos:62%"></div>
+
+<section id="people">
+  <div class="wrap">
+    <h2>Your dispatcher isn't the bottleneck.<br>Their tools are.</h2>
+    <p class="lead">The automation isn't here to replace anyone. It's here so the same person can cover three times the loads without working three times as hard.</p>
+
+    <div class="rows">
+      <div class="row">
+        <h3>Loads come to them</h3>
+        <p>When a truck is about to go empty in an area, matching loads surface on their board. They decide. They just don't have to go hunting first.</p>
+      </div>
+      <div class="row">
+        <h3>Paperwork checks itself</h3>
+        <p>A bad scan gets flagged at the dock while the driver is still standing there — not three weeks later when the invoice gets rejected.</p>
+      </div>
+      <div class="row">
+        <h3>Problems raise their hand</h3>
+        <p>Detention running long, a damage claim, a chargeback that doesn't match the rate con. The system watches for it and says something.</p>
+      </div>
+      <div class="row">
+        <h3>Nobody is the only one who knows</h3>
+        <p>The spreadsheet in one person's head becomes a system everyone can see. Vacations stop being a risk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cut" style="--pos:22%"></div>
+
+<section id="returns">
+  <div class="wrap">
+    <h2>Cost per mile, and how to move it.</h2>
+    <p class="lead">Most fleets calculate cost per mile once a quarter from numbers that are already stale. Here it's current, it's per load, and it tells you what to do differently next week.</p>
+
+    <div class="roi">
+      <div class="roi-item"><b>True cost per load</b><span>Fuel card receipts, maintenance and driver pay land against the load that incurred them. Real margin, not an average.</span></div>
+      <div class="roi-item"><b>Detention you actually bill</b><span>Dock wait is timestamped automatically. If it's billable, it's on the invoice.</span></div>
+      <div class="roi-item"><b>Cash in sooner</b><span>Invoices go out the day of delivery with the packet attached, instead of Friday with a missing POD.</span></div>
+      <div class="roi-item"><b>Fuel visibility</b><span>Spend by truck, by driver, by lane — against what the load actually paid.</span></div>
+    </div>
+
+    <div class="payback">The savings don't have to be dramatic. <em>One properly billed detention charge a week covers what a truck costs to run on the platform.</em></div>
+  </div>
+</section>
+
+<div class="cut" style="--pos:74%"></div>
+
+<section id="pricing">
+  <div class="wrap">
+    <h2>Priced per truck, not per person.</h2>
+    <p class="lead">Per-seat pricing charges you for letting people see their own business. So people share a login, and the person who needs a number waits on the person who has access.</p>
+    <div class="price-band">
+      <div><b>Pay for the trucks you run</b><span>The fleet is the thing that scales, so that's what the price follows.</span></div>
+      <div><b>Give everyone their own login</b><span>Dispatch, accounting, the owner, the drivers. No shared credentials.</span></div>
+      <div><b>Turn off what you don't use</b><span>Every module toggles. Start with the core and add as you grow.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="cut" style="--pos:48%"></div>
+
+<section id="sheets">
+  <div class="wrap">
+    <h2>Tech sheets.</h2>
+    <p class="lead">One page each. Open, read, or save as PDF.</p>
+    <div class="sheets">
+      <div class="sheet-card">
+        <div class="num">01</div>
+        <h3>Platform overview</h3>
+        <p>What the platform covers, what it replaces, and where it fits alongside what you already run.</p>
+        <a href="#sheet-overview">Open sheet</a>
+      </div>
+      <div class="sheet-card">
+        <div class="num">02</div>
+        <h3>How a load moves</h3>
+        <p>Every trigger point from booking to settlement, and what happens without anyone touching it.</p>
+        <a href="#sheet-workflow">Open sheet</a>
+      </div>
+      <div class="sheet-card">
+        <div class="num">03</div>
+        <h3>Getting started</h3>
+        <p>What the first 30 days look like, what we need from you, and how you run both systems safely during cutover.</p>
+        <a href="#sheet-cutover">Open sheet</a>
+      </div>
+      <div class="sheet-card">
+        <div class="num">04</div>
+        <h3>Where the return comes from</h3>
+        <p>The cost-per-mile math, the line items it moves, and how to check it against your own numbers.</p>
+        <a href="#sheet-roi">Open sheet</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="wrap">
+    <h2>See it on your own lanes.</h2>
+    <p class="lead">Bring a week of real loads. We'll walk the whole thing end to end — booking to settlement — and you'll see what it does with your numbers instead of a demo account.</p>
+    <div class="hero-actions" style="margin-top:28px">
+      <a href="mailto:brian@boia.solutions?subject=BOIA%20Freight%20demo" class="btn btn-primary">Email to set up a time</a>
+    </div>
+    <p style="margin-top:20px"><a class="mailto" href="mailto:brian@boia.solutions?subject=BOIA%20Freight%20demo">brian@boia.solutions</a></p>
+    <!-- Scheduling embed can drop in here later (Cal.com / Calendly). -->
+    <div class="demo-box" id="calendar-embed" style="display:none"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap fbar">
+    <span class="wordmark" style="--wm-size:19px">
+      <span class="wm-main">BOIA<span class="wm-mark"></span></span>
+      <span class="wm-sub">FREIGHT</span>
+    </span>
+    <span><a href="mailto:brian@boia.solutions">brian@boia.solutions</a> &nbsp;·&nbsp; boiafreight.com</span>
+  </div>
+</footer>
+
+</div><!-- /sitebody -->
+
+
+<!-- ============ SHEET 01 ============ -->
+<div class="sheetview" id="sheet-overview">
+  <div class="sheetbar">
+    <a href="#sheets">Back to site</a>
+    <button class="btn btn-primary btn-sm" onclick="window.print()">Save as PDF</button>
+  </div>
+  <div class="page sheet">
+    <div class="sheet-head">
+      <div>
+        <span class="wordmark" style="--wm-size:20px">
+          <span class="wm-main">BOIA<span class="wm-mark"></span></span>
+          <span class="wm-sub">FREIGHT</span>
+        </span>
+        <div class="t" style="margin-top:10px">Platform overview</div>
+      </div>
+      <div class="k">Tech sheet 01</div>
+    </div>
+
+    <p class="sheet-intro">One system that carries a load from the moment it's quoted to the moment it's paid — replacing the handoffs between a TMS, a scanning app, a fuel portal, a spreadsheet and accounting.</p>
+
+    <div class="twocol">
+      <div>
+        <h4>What it runs</h4>
+        <ul>
+          <li><b>Loads and dispatch</b> — booking, rating, assignment, dispatch board</li>
+          <li><b>Live tracking</b> — position and ETA from your existing ELD</li>
+          <li><b>Document capture</b> — BOL, POD, lumper receipts, compliance photos</li>
+          <li><b>Billing and settlement</b> — invoice packets, payment tracking</li>
+          <li><b>Fuel and cost</b> — card data matched to the load that burned it</li>
+          <li><b>Maintenance, light</b> — mileage alerts, cost allocated per load</li>
+          <li><b>Customer and driver portals</b> — browser-based, no app install</li>
+        </ul>
+      </div>
+      <div>
+        <h4>What it replaces</h4>
+        <ul>
+          <li>The scanning app and the shared drive of loose PDFs</li>
+          <li>The spreadsheet holding rates, margin and detention</li>
+          <li>Manual rekeying between dispatch and accounting</li>
+          <li>Chasing drivers for paperwork after the fact</li>
+          <li>Quarterly cost-per-mile guesswork</li>
+        </ul>
+        <h4>What stays yours</h4>
+        <ul>
+          <li>Your ELD provider and contract</li>
+          <li>Your fuel card program and pricing</li>
+          <li>Your accounting system, if you want to keep it</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>How it's built</h4>
+    <ul>
+      <li><b>Modular</b> — every area toggles on or off, so the screen only shows what you use</li>
+      <li><b>Per-truck pricing</b> — unlimited logins, so nobody shares credentials to see a number</li>
+      <li><b>Browser-based</b> — office, tablet in the cab, phone at the dock</li>
+      <li><b>Your data stays yours</b> — exportable, and it leaves with you if you ever go</li>
+    </ul>
+
+    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span><span>brian@boia.solutions</span></div>
+  </div>
+</div>
+
+<!-- ============ SHEET 02 ============ -->
+<div class="sheetview" id="sheet-workflow">
+  <div class="sheetbar">
+    <a href="#sheets">Back to site</a>
+    <button class="btn btn-primary btn-sm" onclick="window.print()">Save as PDF</button>
+  </div>
+  <div class="page sheet">
+    <div class="sheet-head">
+      <div>
+        <span class="wordmark" style="--wm-size:20px">
+          <span class="wm-main">BOIA<span class="wm-mark"></span></span>
+          <span class="wm-sub">FREIGHT</span>
+        </span>
+        <div class="t" style="margin-top:10px">How a load moves</div>
+      </div>
+      <div class="k">Tech sheet 02</div>
+    </div>
+
+    <p class="sheet-intro">Each step is triggered by something that already happens in the real world — a truck arriving, a signature, a scan. Nobody has to remember to start the next one.</p>
+
+    <div class="flow">
+      <div class="flow-r flow-h"><div>Step</div><div>What happens</div><div>What it triggers</div></div>
+      <div class="flow-r"><div class="flow-when">Booked</div><div>Load entered or imported with rate and stops</div><div class="flow-auto">Margin estimated against real cost per mile</div></div>
+      <div class="flow-r"><div class="flow-when">Dispatched</div><div>Truck and driver assigned</div><div class="flow-auto">Driver sees the load and required documents</div></div>
+      <div class="flow-r"><div class="flow-when">In transit</div><div>ELD reports position</div><div class="flow-auto">ETA updates; receiver notified as truck nears dock</div></div>
+      <div class="flow-r"><div class="flow-when">At the dock</div><div>Arrival geofence crossed</div><div class="flow-auto">Detention clock starts; billing prep begins</div></div>
+      <div class="flow-r"><div class="flow-when">Loading</div><div>Driver captures required photos and paperwork</div><div class="flow-auto">Bad scans flagged on the spot, before they're stored</div></div>
+      <div class="flow-r"><div class="flow-when">Delivered</div><div>Signed BOL captured</div><div class="flow-auto">Packet assembled; invoice generated same day</div></div>
+      <div class="flow-r"><div class="flow-when">Invoiced</div><div>Packet sent to the customer</div><div class="flow-auto">Aging tracked against the load, not a statement</div></div>
+      <div class="flow-r"><div class="flow-when">Settled</div><div>Payment received and applied</div><div class="flow-auto">Final margin closes with fuel and maintenance included</div></div>
+    </div>
+
+    <div class="twocol">
+      <div>
+        <h4>Gated driver steps</h4>
+        <ul>
+          <li>Required photos must be captured before the next step opens</li>
+          <li>Compliance items — hazmat, seals, temps — enforced by load type</li>
+          <li>Works offline at the dock and syncs when signal returns</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Watched by exception</h4>
+        <ul>
+          <li>Detention running past the free window</li>
+          <li>Damage and cargo claims opened from capture evidence</li>
+          <li>Chargebacks that don't match the rate confirmation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span><span>brian@boia.solutions</span></div>
+  </div>
+</div>
+
+<!-- ============ SHEET 03 ============ -->
+<div class="sheetview" id="sheet-cutover">
+  <div class="sheetbar">
+    <a href="#sheets">Back to site</a>
+    <button class="btn btn-primary btn-sm" onclick="window.print()">Save as PDF</button>
+  </div>
+  <div class="page sheet">
+    <div class="sheet-head">
+      <div>
+        <span class="wordmark" style="--wm-size:20px">
+          <span class="wm-main">BOIA<span class="wm-mark"></span></span>
+          <span class="wm-sub">FREIGHT</span>
+        </span>
+        <div class="t" style="margin-top:10px">Getting started</div>
+      </div>
+      <div class="k">Tech sheet 03</div>
+    </div>
+
+    <p class="sheet-intro">You don't stop running freight to switch systems. The first loads move in parallel with whatever you use today, and the old system doesn't go dark until you say so.</p>
+
+    <h4>The first 30 days</h4>
+    <table class="tbl">
+      <tr><th style="width:110px">Week</th><th>What happens</th></tr>
+      <tr><td>Week 1</td><td>Setup and configuration. Trucks, drivers, customers and lanes loaded. Modules you don't need are switched off.</td></tr>
+      <tr><td>Week 2</td><td>Connections made — ELD, fuel card, accounting export. Your document templates and invoice format matched.</td></tr>
+      <tr><td>Week 3</td><td>Live on a slice. A few trucks run real loads end to end while everything else stays where it is.</td></tr>
+      <tr><td>Week 4</td><td>Full cutover. Remaining trucks moved over, the old system kept read-only for reference.</td></tr>
+    </table>
+
+    <div class="twocol">
+      <div>
+        <h4>What we need from you</h4>
+        <ul>
+          <li>Truck, trailer and driver list</li>
+          <li>Customer list with billing terms</li>
+          <li>ELD and fuel card account access</li>
+          <li>A sample invoice and rate confirmation</li>
+          <li>One person who knows how the office actually runs</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Training</h4>
+        <ul>
+          <li>Dispatch — about two hours, most of it hands on</li>
+          <li>Office and billing — about an hour</li>
+          <li>Drivers — a few minutes; the app walks them through it</li>
+          <li>Support during cutover, on the phone, same people who set it up</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>If it doesn't fit</h4>
+    <ul>
+      <li>Your data exports in full at any point</li>
+      <li>Nothing is locked to a long contract during the first cycle</li>
+    </ul>
+
+    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span><span>brian@boia.solutions</span></div>
+  </div>
+</div>
+
+<!-- ============ SHEET 04 ============ -->
+<div class="sheetview" id="sheet-roi">
+  <div class="sheetbar">
+    <a href="#sheets">Back to site</a>
+    <button class="btn btn-primary btn-sm" onclick="window.print()">Save as PDF</button>
+  </div>
+  <div class="page sheet">
+    <div class="sheet-head">
+      <div>
+        <span class="wordmark" style="--wm-size:20px">
+          <span class="wm-main">BOIA<span class="wm-mark"></span></span>
+          <span class="wm-sub">FREIGHT</span>
+        </span>
+        <div class="t" style="margin-top:10px">Where the return comes from</div>
+      </div>
+      <div class="k">Tech sheet 04</div>
+    </div>
+
+    <p class="sheet-intro">The platform doesn't earn its keep by being cheaper than what you have. It earns it by moving four line items you're already living with — and by letting the same people run more trucks.</p>
+
+    <h4>The four line items</h4>
+    <table class="tbl">
+      <tr><th style="width:200px">Line item</th><th>What changes</th></tr>
+      <tr><td>Unbilled detention</td><td>Dock time is timestamped by geofence, not remembered. Billable wait ends up on the invoice instead of being written off.</td></tr>
+      <tr><td>Days to get paid</td><td>The invoice packet assembles at delivery and goes out the same day, complete. Fewer rejections, shorter aging.</td></tr>
+      <tr><td>Loads taken at a loss</td><td>Real cost per mile — fuel receipts, maintenance, driver pay — is known before you accept, not after the quarter closes.</td></tr>
+      <tr><td>Office hours per load</td><td>Rekeying between five systems stops. That time either goes back to the day or gets spent on more trucks.</td></tr>
+    </table>
+
+    <h4>Check it against your own numbers</h4>
+    <ul>
+      <li>Pull last month's loads. How many had dock wait over two hours, and how many of those were billed?</li>
+      <li>What's your average days-to-pay, and how many invoices came back for a missing document?</li>
+      <li>How many loads last quarter came in under your true cost per mile once fuel and maintenance were counted?</li>
+      <li>How many hours a week does the office spend moving information between systems?</li>
+    </ul>
+
+    <h4>How the cost scales</h4>
+    <ul>
+      <li><b>Per truck, not per seat</b> — the price follows the fleet, which is the thing that actually grows</li>
+      <li><b>Unlimited logins</b> — adding a dispatcher or giving the owner access costs nothing</li>
+      <li><b>Modules off</b> — you're not carrying the price of features you don't run</li>
+    </ul>
+
+    <p style="font-size:15.5px; color:var(--ink-soft); margin-top:20px">The return doesn't need to be dramatic to be real. One properly billed detention charge a week covers what a truck costs to run on the platform.</p>
+
+    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span><span>brian@boia.solutions</span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SHEETS = ['sheet-overview','sheet-workflow','sheet-cutover','sheet-roi'];
+
+  function route(){
+    var id = (location.hash || '').replace('#','');
+    var views = document.querySelectorAll('.sheetview');
+    for (var i=0;i<views.length;i++) views[i].classList.remove('active');
+
+    if (SHEETS.indexOf(id) !== -1){
+      document.body.classList.add('sheet-mode');
+      document.getElementById(id).classList.add('active');
+      document.title = 'BOIA Freight — ' + document.querySelector('#'+id+' .t').textContent;
+      window.scrollTo(0,0);
+    } else {
+      document.body.classList.remove('sheet-mode');
+      document.title = 'BOIA Freight';
+      if (id){
+        var t = document.getElementById(id);
+        if (t) setTimeout(function(){ t.scrollIntoView({behavior:'smooth', block:'start'}); }, 0);
+      }
+    }
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>
