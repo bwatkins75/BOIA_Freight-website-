@@ -3,10 +3,11 @@ frontend:
   phases:
     build:
       commands:
-        - echo "Static site - no build step"
-        - rm -rf README.md amplify.yml .gitignore backend
+        - echo "Static site - copy only public files into dist/"
+        - mkdir -p dist
+        - cp -a index.html 404.html favicon.ico site.webmanifest robots.txt sitemap.xml assets privacy dist/
   artifacts:
-    baseDirectory: /
+    baseDirectory: dist
     files:
       - '**/*'
   cache:

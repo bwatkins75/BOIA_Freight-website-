@@ -70,8 +70,10 @@ Extra pages: `privacy/index.html`, `robots.txt`, `sitemap.xml`.
 
 ## Not served
 
-`amplify.yml` removes README.md, amplify.yml, .gitignore and `backend/` from the
-build output, so none of them is publicly reachable. The demo-form backend
+`amplify.yml` copies only the public files (index.html, 404.html, favicon,
+manifest, robots.txt, sitemap.xml, assets/, privacy/) into `dist/` and publishes
+that, so README.md, amplify.yml, .gitignore and `backend/` are not reachable.
+Add any new public file or folder to the `cp` line. The demo-form backend
 source and deploy notes are in `backend/demo-form/`.
 
 ## To do later
