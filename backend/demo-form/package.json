@@ -1,0 +1,10 @@
+{
+  "name": "boiafreight-demo-request",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "boiafreight.com Request-a-demo backend (Lambda + SES + Turnstile). Not deployed.",
+  "main": "index.mjs",
+  "scripts": { "test": "node --test test.mjs" },
+  "dependencies": {}
+}

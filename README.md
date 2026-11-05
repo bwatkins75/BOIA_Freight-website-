@@ -57,16 +57,25 @@ Open `index.html` in a browser, or:
 
     python3 -m http.server 8000
 
+## Demo request form
+
+The `#demo` section has a "Request a demo" form. It posts JSON to the path in
+`data-endpoint` on `#demo-form` (planned: `/api/demo`, an Amplify 200 rewrite
+to a Lambda Function URL) and loads Cloudflare Turnstile when `data-sitekey`
+is set. With both empty, the form only shows a "preview only" notice.
+The recipient inbox lives only in the backend's env var. Never put an email
+address or mail link in this repo's site files.
+
+Extra pages: `privacy/index.html`, `robots.txt`, `sitemap.xml`.
+
+## Not served
+
+`amplify.yml` removes README.md, amplify.yml, .gitignore and `backend/` from the
+build output, so none of them is publicly reachable. The demo-form backend
+source and deploy notes are in `backend/demo-form/`.
+
 ## To do later
 
-- Scheduling embed — paste the Cal.com or Calendly snippet into the
-  `#calendar-embed` div in the demo section and remove `display:none`.
-- Analytics — add the Plausible script tag before `</head>`.
-- Proof line — a short customer, fleet-size or founder note under the hero.
-- Product screenshots — replace the CSS mockups in the hero and People
-  sections once real UI exists.
-- Pricing page — intentionally left off.
-
-## Contact
-
-brian@boia.solutions
+- Product screenshots: replace the CSS mockups in the hero and People
+  sections once real UI exists (keep the "Illustrative" tags until then).
+- Commercial terms are intentionally left off the site.

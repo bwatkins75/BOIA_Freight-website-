@@ -1,0 +1,114 @@
+# Plain CloudFormation (no SAM transform) for the boiafreight.com demo-request backend.
+# Deployed as stack "BoiaFreight-DemoForm" in us-east-2. Code zip is uploaded to the CDK assets bucket.
+AWSTemplateFormatVersion: "2010-09-09"
+Description: boiafreight.com Request-a-demo backend (Lambda Function URL + SES + DynamoDB rate limit)
+Parameters:
+  ToAddress:   { Type: String, NoEcho: true }
+  FromAddress: { Type: String, Default: no-reply@boiafreight.com }
+  TurnstileSecretParam: { Type: String, Default: /boiafreight/site/turnstile-secret }
+  CodeBucket:  { Type: String }
+  CodeKey:     { Type: String }
+  HostedZoneId: { Type: String, Default: Z1033482ADZQZNTHO74R }
+Resources:
+  RateTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: boiafreight-demo-rl
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions: [{ AttributeName: k, AttributeType: S }]
+      KeySchema: [{ AttributeName: k, KeyType: HASH }]
+      TimeToLiveSpecification: { AttributeName: exp, Enabled: true }
+      Tags: [{ Key: Project, Value: BOIA-Freight }, { Key: Env, Value: prod-site }]
+  Logs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/boiafreight-demo-request
+      RetentionInDays: 7
+      Tags: [{ Key: Project, Value: BOIA-Freight }, { Key: Env, Value: prod-site }]
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: boiafreight-demo-request-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement: [{ Effect: Allow, Principal: { Service: lambda.amazonaws.com }, Action: sts:AssumeRole }]
+      Policies:
+        - PolicyName: demo-form
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: ses:SendEmail
+                Resource: !Sub arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/*
+                Condition: { StringEquals: { "ses:FromAddress": !Ref FromAddress } }
+              - { Effect: Allow, Action: dynamodb:UpdateItem, Resource: !GetAtt RateTable.Arn }
+              - { Effect: Allow, Action: ssm:GetParameter, Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${TurnstileSecretParam}" }
+              - { Effect: Allow, Action: [logs:CreateLogStream, logs:PutLogEvents], Resource: !Sub "${Logs.Arn}" }
+      Tags: [{ Key: Project, Value: BOIA-Freight }, { Key: Env, Value: prod-site }]
+  Fn:
+    Type: AWS::Lambda::Function
+    DependsOn: Logs
+    Properties:
+      FunctionName: boiafreight-demo-request
+      Runtime: nodejs22.x
+      Architectures: [arm64]
+      Handler: index.handler
+      Code: { S3Bucket: !Ref CodeBucket, S3Key: !Ref CodeKey }
+      MemorySize: 128
+      Timeout: 6
+      Role: !GetAtt Role.Arn
+      Environment:
+        Variables:
+          TO_ADDRESS: !Ref ToAddress
+          FROM_ADDRESS: !Ref FromAddress
+          RATE_TABLE: !Ref RateTable
+          TURNSTILE_SECRET_PARAM: !Ref TurnstileSecretParam
+          ALLOWED_ORIGINS: https://www.boiafreight.com,https://boiafreight.com
+      Tags: [{ Key: Project, Value: BOIA-Freight }, { Key: Env, Value: prod-site }]
+  FnUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      TargetFunctionArn: !GetAtt Fn.Arn
+      AuthType: NONE
+      Cors:
+        AllowOrigins: [https://www.boiafreight.com, https://boiafreight.com]
+        AllowMethods: [POST]
+        AllowHeaders: [content-type]
+        MaxAge: 3600
+  UrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref Fn
+      Action: lambda:InvokeFunctionUrl
+      Principal: "*"
+      FunctionUrlAuthType: NONE
+  UrlInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref Fn
+      Action: lambda:InvokeFunction
+      Principal: "*"
+      InvokedViaFunctionUrl: true
+  DomainIdentity:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: boiafreight.com
+      DkimSigningAttributes: { NextSigningKeyLength: RSA_2048_BIT }
+  Dkim1:
+    Type: AWS::Route53::RecordSet
+    Properties: { HostedZoneId: !Ref HostedZoneId, Name: !GetAtt DomainIdentity.DkimDNSTokenName1, Type: CNAME, TTL: "1800", ResourceRecords: [!GetAtt DomainIdentity.DkimDNSTokenValue1] }
+  Dkim2:
+    Type: AWS::Route53::RecordSet
+    Properties: { HostedZoneId: !Ref HostedZoneId, Name: !GetAtt DomainIdentity.DkimDNSTokenName2, Type: CNAME, TTL: "1800", ResourceRecords: [!GetAtt DomainIdentity.DkimDNSTokenValue2] }
+  Dkim3:
+    Type: AWS::Route53::RecordSet
+    Properties: { HostedZoneId: !Ref HostedZoneId, Name: !GetAtt DomainIdentity.DkimDNSTokenName3, Type: CNAME, TTL: "1800", ResourceRecords: [!GetAtt DomainIdentity.DkimDNSTokenValue3] }
+  RecipientIdentity:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: !Ref ToAddress
+Outputs:
+  FunctionUrl: { Value: !GetAtt FnUrl.FunctionUrl }
+  FunctionArn: { Value: !GetAtt Fn.Arn }
+  TableName: { Value: !Ref RateTable }
+  RoleArn: { Value: !GetAtt Role.Arn }
