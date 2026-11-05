@@ -4,19 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BOIA Freight</title>
-<meta name="description" content="One platform from quote to paid. Dispatch, documents, fuel and settlement in one system, priced per truck.">
+<meta name="description" content="One platform from quote to paid. Dispatch, documents, fuel and settlement in one system.">
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
+<link rel="canonical" href="https://www.boiafreight.com/">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#F5F6F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1B222B" media="(prefers-color-scheme: dark)">
 <script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BOIA Freight">
-<meta property="og:description" content="One platform from quote to paid. Dispatch, documents, fuel and settlement in one system, priced per truck.">
-<meta property="og:url" content="https://boiafreight.com/">
+<meta property="og:description" content="One platform from quote to paid. Dispatch, documents, fuel and settlement in one system.">
+<meta property="og:url" content="https://www.boiafreight.com/">
 <meta property="og:image" content="https://boiafreight.com/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,11 +164,11 @@ p{margin:0 0 18px; max-width:64ch}
   font-size:clamp(18px,2.4vw,22px); font-weight:500; line-height:1.4; max-width:62ch}
 .payback em{font-style:normal; color:#8FB8FF}
 
-/* ---------- pricing ---------- */
-.price-band{display:flex; flex-wrap:wrap; gap:28px; margin-top:30px}
-.price-band div{flex:1 1 200px}
-.price-band b{display:block; font-weight:600; margin-bottom:6px}
-.price-band span{color:var(--ink-soft); font-size:15.5px}
+/* ---------- logins ---------- */
+.login-band{display:flex; flex-wrap:wrap; gap:28px; margin-top:30px}
+.login-band div{flex:1 1 200px}
+.login-band b{display:block; font-weight:600; margin-bottom:6px}
+.login-band span{color:var(--ink-soft); font-size:15.5px}
 
 /* ---------- sheets ---------- */
 .sheets{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:34px}
@@ -185,7 +186,22 @@ p{margin:0 0 18px; max-width:64ch}
 .demo .wm-main{color:#fff}
 .demo-box{margin-top:30px; border:1px dashed #4B5866; padding:30px; text-align:center;
   color:#8E99A6; font-size:15px}
-.mailto{font-weight:600; color:#8FB8FF; text-decoration:none; font-size:18px}
+.demo-form{margin-top:28px; max-width:720px; background:#232C37; border:1px solid #37424F; padding:26px}
+.df-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px 20px}
+@media(max-width:640px){ .df-grid{grid-template-columns:1fr} }
+.demo-form label{display:flex; flex-direction:column; gap:6px; font-size:14px; font-weight:600; color:#EEF1F4}
+.demo-form label small{font-weight:400; color:#98A1AC}
+.demo-form input, .demo-form select{font:inherit; font-weight:400; font-size:15px; padding:11px 12px; border:1px solid #4B5866;
+  background:#1B222B; color:#EEF1F4; border-radius:2px}
+.demo-form input:focus, .demo-form select:focus{outline:2px solid var(--blue); outline-offset:1px}
+.df-hp{position:absolute !important; left:-9999px; width:1px; height:1px; overflow:hidden}
+.df-captcha{margin:20px 0 6px; min-height:65px; display:flex; align-items:center}
+.df-fields{border:0; margin:0; padding:0; min-width:0}
+.df-fields[disabled]{opacity:.45}
+.demo .df-soon{margin:0 0 20px; padding:14px 16px; border-left:3px solid var(--blue); background:#1B222B; color:#EEF1F4; font-size:15.5px}
+.demo .df-note{font-size:13.5px; color:#98A1AC; margin:10px 0 18px}
+.demo .df-note a{color:#8FB8FF}
+.demo .df-status{margin:14px 0 0; font-size:15px; color:#8FB8FF; min-height:1.4em}
 
 footer{padding:34px 0; border-top:1px solid var(--rule); font-size:14px; color:var(--ink-faint)}
 .fbar{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px}
@@ -245,7 +261,7 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
   stroke-linecap:round; stroke-linejoin:round; flex:none}
 .tool .ico{display:block; color:var(--blue); margin-bottom:12px}
 .roi-item .ico{display:block; color:var(--blue); margin-bottom:12px}
-.price-band .ico{display:block; color:var(--blue); margin-bottom:10px}
+.login-band .ico{display:block; color:var(--blue); margin-bottom:10px}
 .row h3{display:flex; align-items:center; gap:10px}
 .row h3 .ico{color:var(--blue); width:20px; height:20px}
 
@@ -345,7 +361,7 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
 .ref-l{stroke:var(--ink-faint); stroke-width:1.5; stroke-dasharray:4 4}
 @media(max-width:640px){ .dash-tiles{grid-template-columns:1fr 1fr} .tile:nth-child(2){border-right:none} .tile:nth-child(-n+2){border-bottom:1px solid var(--rule)} }
 
-/* ---------- pricing fleet ---------- */
+/* ---------- fleet graphic ---------- */
 .fleet{display:block; width:100%; height:auto; margin:40px 0 0}
 .fleet-cap{font-size:14.5px; color:var(--ink-faint); margin:10px 0 0}
 
@@ -353,7 +369,7 @@ table.tbl td:first-child{color:var(--ink); font-weight:500}
 h1,h2,h3{text-wrap:balance}
 .btn{transition:background .15s, border-color .15s, color .15s, transform .15s}
 .btn:hover{transform:translateY(-1px)}
-.hnav a, footer a, .sheet-card a, .mailto{transition:color .15s}
+.hnav a, footer a, .sheet-card a{transition:color .15s}
 .tool{transition:background .15s}
 .sheet-card{transition:transform .2s, border-color .2s, box-shadow .2s}
 .sheet-card:hover{transform:translateY(-3px); border-color:var(--ink-faint); box-shadow:0 18px 40px -28px rgba(43,52,64,.45)}
@@ -504,7 +520,7 @@ footer a:hover{color:var(--ink)}
       <a href="#returns" class="hide-sm">Returns</a>
       <a href="#sheets" class="hide-sm">Tech sheets</a>
       <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark mode"><svg class="ico i-moon"><use href="#i-moon"/></svg><svg class="ico i-sun"><use href="#i-sun"/></svg></button>
-      <a href="#demo" class="btn btn-primary btn-sm">Book a demo</a>
+      <a href="#demo" class="btn btn-primary btn-sm">Request a demo</a>
       <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span></button>
     </nav>
   </div>
@@ -512,9 +528,8 @@ footer a:hover{color:var(--ink)}
     <a href="#platform">Platform</a>
     <a href="#people">People</a>
     <a href="#returns">Returns</a>
-    <a href="#pricing">Pricing</a>
     <a href="#sheets">Tech sheets</a>
-    <a href="#demo">Book a demo</a>
+    <a href="#demo">Request a demo</a>
   </div>
 </header>
 
@@ -524,9 +539,9 @@ footer a:hover{color:var(--ink)}
   <div class="wrap">
     <div>
       <h1>One platform,<br>quote to paid.<span class="slice"><span class="slice-mark"></span></span></h1>
-      <p class="lead" style="margin-top:28px">Most small fleets run on five systems and a spreadsheet. BOIA Freight replaces the stack — dispatch, documents, fuel and settlement in one place, priced per truck.</p>
+      <p class="lead" style="margin-top:28px">Most small fleets run on five systems and a spreadsheet. BOIA Freight replaces the stack — dispatch, documents, fuel and settlement in one place.</p>
       <div class="hero-actions">
-        <a href="#demo" class="btn btn-primary">Book a demo</a>
+        <a href="#demo" class="btn btn-primary">Request a demo</a>
         <a href="#sheets" class="btn btn-ghost">Read the tech sheets</a>
       </div>
       <p class="hero-note">Built for carriers running 3 to 100 trucks.</p>
@@ -534,7 +549,7 @@ footer a:hover{color:var(--ink)}
 
     <div class="hero-visual" aria-hidden="true">
       <div class="mock">
-        <div class="mock-bar"><i></i><i></i><i></i><b>Dispatch board</b><span class="chip">Tue · 14 loads</span></div>
+        <div class="mock-bar"><i></i><i></i><i></i><b>Dispatch board</b><span class="chip">Tue · 14 loads</span><span class="chip">Illustrative</span></div>
         <div class="mock-head"><span>Truck</span><span>Load</span><span>Status</span><span style="text-align:right">Margin</span></div>
         <div class="mock-row"><b>T-102</b><div><div class="route">Dallas → Memphis</div><span class="prog"><i style="--p:100%"></i></span></div><span class="chip chip-ink">Delivered</span><span class="m">$0.61/mi</span></div>
         <div class="mock-row is-live"><b>T-114</b><div><div class="route">Tulsa → Little Rock</div><span class="prog"><i style="--p:88%"></i></span></div><span class="chip chip-blue">At dock</span><span class="m">$0.47/mi</span></div>
@@ -597,7 +612,7 @@ footer a:hover{color:var(--ink)}
       <text x="112" y="240" text-anchor="middle" class="il-text">Booked</text>
       <text x="112" y="256" text-anchor="middle" class="il-sub">Rated against real cost per mile</text>
       <text x="482" y="240" text-anchor="middle" class="il-text">In transit</text>
-      <text x="482" y="256" text-anchor="middle" class="il-sub">ETA from the ELD you already run</text>
+      <text x="482" y="256" text-anchor="middle" class="il-sub">Live location and ETA</text>
       <text x="840" y="240" text-anchor="middle" class="il-text">Delivered</text>
       <text x="840" y="256" text-anchor="middle" class="il-sub">Signed BOL. Invoice out the same day.</text>
     </svg>
@@ -607,7 +622,7 @@ footer a:hover{color:var(--ink)}
       <div class="lane-steps">
         <div class="step"><div class="stepico"><svg class="ico"><use href="#i-tag"/></svg></div><b>Quote</b><span>Rate the load against your real cost, not a guess.</span></div>
         <div class="step"><div class="stepico"><svg class="ico"><use href="#i-truck"/></svg></div><b>Dispatch</b><span>Assign the right truck and driver for the lane.</span></div>
-        <div class="step"><div class="stepico"><svg class="ico"><use href="#i-pin"/></svg></div><b>Track</b><span>Live location from the ELD you already run.</span></div>
+        <div class="step"><div class="stepico"><svg class="ico"><use href="#i-pin"/></svg></div><b>Track</b><span>Live location and ETA. ELD integrations coming soon.</span></div>
         <div class="step"><div class="stepico"><svg class="ico"><use href="#i-camera"/></svg></div><b>Capture</b><span>Photos and paperwork checked at the dock.</span></div>
         <div class="step"><div class="stepico"><svg class="ico"><use href="#i-send"/></svg></div><b>Invoice</b><span>Packet assembles itself and goes out same day.</span></div>
         <div class="step"><div class="stepico"><svg class="ico"><use href="#i-check-circle"/></svg></div><b>Settle</b><span>Payment tracked to the load that earned it.</span></div>
@@ -627,7 +642,7 @@ footer a:hover{color:var(--ink)}
     <div class="rows">
       <div class="row">
         <h3><svg class="ico"><use href="#i-inbox-in"/></svg>Loads come to them</h3>
-        <p>When a truck is about to go empty in an area, matching loads surface on their board. They decide. They just don't have to go hunting first.</p>
+        <p>When a truck is about to go empty, the board flags it and suggests the next move. Load board connections coming soon. They decide. They just don't have to go hunting first.</p>
       </div>
       <div class="row">
         <h3><svg class="ico"><use href="#i-shield-check"/></svg>Paperwork checks itself</h3>
@@ -645,7 +660,7 @@ footer a:hover{color:var(--ink)}
 
     <div class="mock-sticky" aria-hidden="true">
       <div class="mock">
-        <div class="mock-bar"><i></i><i></i><i></i><b>Needs a decision</b><span class="chip chip-blue">4</span></div>
+        <div class="mock-bar"><i></i><i></i><i></i><b>Needs a decision</b><span class="chip chip-blue">4</span><span class="chip">Illustrative</span></div>
         <div class="mock-alert">
           <svg class="ico"><use href="#i-clock"/></svg>
           <div><b>Detention running · T-108</b><span>Free window ends in 16 min at the Shreveport DC. Billable at $75/hr after.</span><span class="act">Notify customer</span></div>
@@ -660,7 +675,7 @@ footer a:hover{color:var(--ink)}
         </div>
         <div class="mock-alert">
           <svg class="ico"><use href="#i-inbox-in"/></svg>
-          <div><b>T-114 goes empty in Little Rock at 3:10 pm</b><span>3 matching loads within 40 miles. Best margin $0.58/mi to Dallas.</span><span class="act">See matches</span></div>
+          <div><b>T-114 goes empty in Little Rock at 3:10 pm</b><span>Suggested next move: reposition toward Dallas. Load board matches coming soon.</span><span class="act">See suggestion</span></div>
         </div>
       </div>
     </div>
@@ -698,32 +713,26 @@ footer a:hover{color:var(--ink)}
     </div>
 
     <div class="roi">
-      <div class="roi-item"><svg class="ico"><use href="#i-gauge"/></svg><b>True cost per load</b><span>Fuel card receipts, maintenance and driver pay land against the load that incurred them. Real margin, not an average.</span></div>
+      <div class="roi-item"><svg class="ico"><use href="#i-gauge"/></svg><b>True cost per load</b><span>Fuel, maintenance and driver pay land against the load that incurred them. Fuel card connections coming soon.</span></div>
       <div class="roi-item"><svg class="ico"><use href="#i-clock"/></svg><b>Detention you actually bill</b><span>Dock wait is timestamped automatically. If it's billable, it's on the invoice.</span></div>
       <div class="roi-item"><svg class="ico"><use href="#i-cash"/></svg><b>Cash in sooner</b><span>Invoices go out the day of delivery with the packet attached, instead of Friday with a missing POD.</span></div>
-      <div class="roi-item"><svg class="ico"><use href="#i-fuel"/></svg><b>Fuel visibility</b><span>Spend by truck, by driver, by lane — against what the load actually paid.</span></div>
+      <div class="roi-item"><svg class="ico"><use href="#i-fuel"/></svg><b>Fuel visibility</b><span>Estimated fuel spend by truck, by driver, by lane — against what the load actually paid. Fuel card connections coming soon.</span></div>
     </div>
 
-    <div class="payback">The savings don't have to be dramatic. <em>One properly billed detention charge a week covers what a truck costs to run on the platform.</em></div>
+    <div class="payback">The return doesn't need to be dramatic to be real. <em>Billing the detention you already earn is often enough to notice.</em></div>
   </div>
 </section>
 
 <div class="cut" style="--pos:74%"></div>
 
-<section id="pricing">
+<section id="logins">
   <div class="wrap">
-    <h2>Priced per truck, not per person.</h2>
-    <p class="lead">Per-seat pricing charges you for letting people see their own business. So people share a login, and the person who needs a number waits on the person who has access.</p>
-    <div class="price-band">
-      <div><svg class="ico"><use href="#i-truck"/></svg><b>Pay for the trucks you run</b><span>The fleet is the thing that scales, so that's what the price follows.</span></div>
-      <div><svg class="ico"><use href="#i-key"/></svg><b>Give everyone their own login</b><span>Dispatch, accounting, the owner, the drivers. No shared credentials.</span></div>
+    <h2>Everyone gets their own login.</h2>
+    <p class="lead">Dispatch, billing, the owner and every driver sign in as themselves, with the access their role needs. No shared passwords, and nobody waits on someone else to see a number.</p>
+    <div class="login-band">
+      <div><svg class="ico"><use href="#i-key"/></svg><b>Access by role</b><span>Dispatch, accounting, the owner, the drivers. Each sees what their job needs.</span></div>
       <div><svg class="ico"><use href="#i-toggle"/></svg><b>Turn off what you don't use</b><span>Every module toggles. Start with the core and add as you grow.</span></div>
     </div>
-    <svg class="fleet" viewBox="0 0 1000 70" role="img" aria-label="Eight trucks lined up along one lane.">
-      <line x1="20" y1="54" x2="980" y2="54" class="il-rule" stroke-width="2"/>
-      <use href="#il-truck" x="30" y="18" width="98" height="36"/><use href="#il-truck" x="152" y="18" width="98" height="36"/><use href="#il-truck" x="274" y="18" width="98" height="36"/><use href="#il-truck" x="396" y="18" width="98" height="36"/><use href="#il-truck" x="518" y="18" width="98" height="36"/><use href="#il-truck" x="640" y="18" width="98" height="36"/><use href="#il-truck" x="762" y="18" width="98" height="36"/><use href="#il-truck" x="884" y="18" width="98" height="36"/>
-    </svg>
-    <p class="fleet-cap">Eight trucks, eight per-truck licenses. As many logins as the office needs.</p>
   </div>
 </section>
 
@@ -765,13 +774,44 @@ footer a:hover{color:var(--ink)}
 <section class="demo" id="demo">
   <div class="wrap">
     <h2>See it on your own lanes.</h2>
-    <p class="lead">Bring a week of real loads. We'll walk the whole thing end to end — booking to settlement — and you'll see what it does with your numbers instead of a demo account.</p>
+    <p class="lead">Bring a week of real loads. We'll walk through how they'd move from booking to settlement, with your numbers instead of a sample account.</p>
     <div class="hero-actions" style="margin-top:28px">
-      <a href="mailto:brian@boia.solutions?subject=BOIA%20Freight%20demo" class="btn btn-primary">Email to set up a time</a>
+      <button type="button" class="btn btn-primary" id="demo-open" aria-expanded="false" aria-controls="demo-form">Request a demo</button>
     </div>
-    <p style="margin-top:20px"><a class="mailto" href="mailto:brian@boia.solutions?subject=BOIA%20Freight%20demo">brian@boia.solutions</a></p>
-    <!-- Scheduling embed can drop in here later (Cal.com / Calendly). -->
-    <div class="demo-box" id="calendar-embed" style="display:none"></div>
+    <!-- CONFIG: data-endpoint = same-origin path to the demo backend.
+         data-sitekey = public Cloudflare Turnstile site key. While it is empty the form stays
+         disabled and shows "Demo requests open shortly". To open the form, paste the site key here. -->
+    <form class="demo-form" id="demo-form" hidden novalidate data-endpoint="/api/demo" data-sitekey="">
+      <p class="df-soon" id="df-soon" hidden>Demo requests open shortly. Please check back in a few days.</p>
+      <fieldset class="df-fields" id="df-fields">
+      <div class="df-grid">
+        <label>Name<input name="name" autocomplete="name" maxlength="120" required></label>
+        <label>Company<input name="company" autocomplete="organization" maxlength="160" required></label>
+        <label>Fleet size
+          <select name="fleet" required>
+            <option value="">Choose one</option>
+            <option>1–2 trucks</option><option>3–10 trucks</option><option>11–25 trucks</option>
+            <option>26–50 trucks</option><option>51–100 trucks</option><option>More than 100</option>
+          </select>
+        </label>
+        <label>Best time to reach you
+          <select name="best_time" required>
+            <option value="">Choose one</option>
+            <option>Weekday morning (CT)</option><option>Weekday midday (CT)</option>
+            <option>Weekday afternoon (CT)</option><option>Any time</option>
+          </select>
+        </label>
+        <label>Work email<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+        <label>Phone <small>(optional)</small><input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+      </div>
+      <label class="df-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+      <input type="hidden" name="ts" value="">
+      <div class="df-captcha" id="df-captcha"></div>
+      <p class="df-note">We use these details only to set up your demo. See our <a href="/privacy/">privacy notice</a>.</p>
+      <button type="submit" class="btn btn-primary">Send request</button>
+      </fieldset>
+      <p class="df-status" id="df-status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
@@ -789,14 +829,14 @@ footer a:hover{color:var(--ink)}
         <a href="#platform">Platform</a>
         <a href="#people">People</a>
         <a href="#returns">Returns</a>
-        <a href="#pricing">Pricing</a>
         <a href="#sheets">Tech sheets</a>
-        <a href="#demo">Book a demo</a>
+        <a href="#demo">Request a demo</a>
+        <a href="/privacy/">Privacy</a>
       </nav>
     </div>
     <div class="fbar fsub">
       <span>One platform, quote to paid. Built for carriers running 3 to 100 trucks.</span>
-      <span><a href="mailto:brian@boia.solutions">brian@boia.solutions</a> &nbsp;·&nbsp; boiafreight.com</span>
+      <span>BOIA Freight · boiafreight.com &nbsp;·&nbsp; <a href="/privacy/">Privacy</a></span>
     </div>
   </div>
 </footer>
@@ -832,10 +872,10 @@ footer a:hover{color:var(--ink)}
         <h4>What it runs</h4>
         <ul>
           <li><b>Loads and dispatch</b> — booking, rating, assignment, dispatch board</li>
-          <li><b>Live tracking</b> — position and ETA from your existing ELD</li>
+          <li><b>Live tracking</b> — position and ETA; ELD integrations coming soon</li>
           <li><b>Document capture</b> — BOL, POD, lumper receipts, compliance photos</li>
           <li><b>Billing and settlement</b> — invoice packets, payment tracking</li>
-          <li><b>Fuel and cost</b> — card data matched to the load that burned it</li>
+          <li><b>Fuel and cost</b> — fuel cost per load estimated at current regional diesel; fuel card connections coming soon</li>
           <li><b>Maintenance, light</b> — mileage alerts, cost allocated per load</li>
           <li><b>Customer and driver portals</b> — browser-based, no app install</li>
         </ul>
@@ -852,7 +892,7 @@ footer a:hover{color:var(--ink)}
         <h4>What stays yours</h4>
         <ul>
           <li>Your ELD provider and contract</li>
-          <li>Your fuel card program and pricing</li>
+          <li>Your fuel card program and its rates</li>
           <li>Your accounting system, if you want to keep it</li>
         </ul>
       </div>
@@ -861,12 +901,12 @@ footer a:hover{color:var(--ink)}
     <h4>How it's built</h4>
     <ul>
       <li><b>Modular</b> — every area toggles on or off, so the screen only shows what you use</li>
-      <li><b>Per-truck pricing</b> — unlimited logins, so nobody shares credentials to see a number</li>
+      <li><b>Role-based logins</b> — everyone signs in as themselves</li>
       <li><b>Browser-based</b> — office, tablet in the cab, phone at the dock</li>
       <li><b>Your data stays yours</b> — exportable, and it leaves with you if you ever go</li>
     </ul>
 
-    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span><span>brian@boia.solutions</span></div>
+    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span></div>
   </div>
 </div>
 
@@ -897,7 +937,7 @@ footer a:hover{color:var(--ink)}
       <div class="flow-r flow-h"><div>Step</div><div>What happens</div><div>What it triggers</div></div>
       <div class="flow-r"><div class="flow-when">Booked</div><div>Load entered or imported with rate and stops</div><div class="flow-auto">Margin estimated against real cost per mile</div></div>
       <div class="flow-r"><div class="flow-when">Dispatched</div><div>Truck and driver assigned</div><div class="flow-auto">Driver sees the load and required documents</div></div>
-      <div class="flow-r"><div class="flow-when">In transit</div><div>ELD reports position</div><div class="flow-auto">ETA updates; receiver notified as truck nears dock</div></div>
+      <div class="flow-r"><div class="flow-when">In transit</div><div>Position from your ELD (integrations coming soon)</div><div class="flow-auto">ETA refreshes; receiver notified as the truck nears the dock</div></div>
       <div class="flow-r"><div class="flow-when">At the dock</div><div>Arrival geofence crossed</div><div class="flow-auto">Detention clock starts; billing prep begins</div></div>
       <div class="flow-r"><div class="flow-when">Loading</div><div>Driver captures required photos and paperwork</div><div class="flow-auto">Bad scans flagged on the spot, before they're stored</div></div>
       <div class="flow-r"><div class="flow-when">Delivered</div><div>Signed BOL captured</div><div class="flow-auto">Packet assembled; invoice generated same day</div></div>
@@ -924,7 +964,7 @@ footer a:hover{color:var(--ink)}
       </div>
     </div>
 
-    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span><span>brian@boia.solutions</span></div>
+    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span></div>
   </div>
 </div>
 
@@ -955,7 +995,7 @@ footer a:hover{color:var(--ink)}
     <table class="tbl">
       <tr><th style="width:110px">Week</th><th>What happens</th></tr>
       <tr><td>Week 1</td><td>Setup and configuration. Trucks, drivers, customers and lanes loaded. Modules you don't need are switched off.</td></tr>
-      <tr><td>Week 2</td><td>Connections made — ELD, fuel card, accounting export. Your document templates and invoice format matched.</td></tr>
+      <tr><td>Week 2</td><td>Accounting export set up, and your document templates and invoice format matched. ELD and fuel card connections are added as each integration goes live.</td></tr>
       <tr><td>Week 3</td><td>Live on a slice. A few trucks run real loads end to end while everything else stays where it is.</td></tr>
       <tr><td>Week 4</td><td>Full cutover. Remaining trucks moved over, the old system kept read-only for reference.</td></tr>
     </table>
@@ -966,7 +1006,7 @@ footer a:hover{color:var(--ink)}
         <ul>
           <li>Truck, trailer and driver list</li>
           <li>Customer list with billing terms</li>
-          <li>ELD and fuel card account access</li>
+          <li>Recent ELD and fuel card exports (CSV), so your history comes over</li>
           <li>A sample invoice and rate confirmation</li>
           <li>One person who knows how the office actually runs</li>
         </ul>
@@ -985,10 +1025,9 @@ footer a:hover{color:var(--ink)}
     <h4>If it doesn't fit</h4>
     <ul>
       <li>Your data exports in full at any point</li>
-      <li>Nothing is locked to a long contract during the first cycle</li>
     </ul>
 
-    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span><span>brian@boia.solutions</span></div>
+    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span></div>
   </div>
 </div>
 
@@ -1020,7 +1059,7 @@ footer a:hover{color:var(--ink)}
       <tr><th style="width:200px">Line item</th><th>What changes</th></tr>
       <tr><td>Unbilled detention</td><td>Dock time is timestamped by geofence, not remembered. Billable wait ends up on the invoice instead of being written off.</td></tr>
       <tr><td>Days to get paid</td><td>The invoice packet assembles at delivery and goes out the same day, complete. Fewer rejections, shorter aging.</td></tr>
-      <tr><td>Loads taken at a loss</td><td>Real cost per mile — fuel receipts, maintenance, driver pay — is known before you accept, not after the quarter closes.</td></tr>
+      <tr><td>Loads taken at a loss</td><td>Your cost per mile — fuel at current regional diesel, maintenance, driver pay — is estimated before you accept, not after the quarter closes.</td></tr>
       <tr><td>Office hours per load</td><td>Rekeying between five systems stops. That time either goes back to the day or gets spent on more trucks.</td></tr>
     </table>
 
@@ -1032,16 +1071,9 @@ footer a:hover{color:var(--ink)}
       <li>How many hours a week does the office spend moving information between systems?</li>
     </ul>
 
-    <h4>How the cost scales</h4>
-    <ul>
-      <li><b>Per truck, not per seat</b> — the price follows the fleet, which is the thing that actually grows</li>
-      <li><b>Unlimited logins</b> — adding a dispatcher or giving the owner access costs nothing</li>
-      <li><b>Modules off</b> — you're not carrying the price of features you don't run</li>
-    </ul>
+    <p style="font-size:15.5px; color:var(--ink-soft); margin-top:20px">The return doesn't need to be dramatic to be real. Billing the detention you already earn is often enough to notice.</p>
 
-    <p style="font-size:15.5px; color:var(--ink-soft); margin-top:20px">The return doesn't need to be dramatic to be real. One properly billed detention charge a week covers what a truck costs to run on the platform.</p>
-
-    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span><span>brian@boia.solutions</span></div>
+    <div class="sheet-foot"><span>BOIA Freight · boiafreight.com</span></div>
   </div>
 </div>
 
@@ -1101,6 +1133,52 @@ footer a:hover{color:var(--ink)}
   for (var j=0;j<mlinks.length;j++) mlinks[j].addEventListener('click', closeMenu);
   window.addEventListener('hashchange', closeMenu);
 
+
+  /* demo request form */
+  var dOpen = document.getElementById('demo-open'), dForm = document.getElementById('demo-form');
+  var dStatus = document.getElementById('df-status'), tsField = dForm.elements['ts'];
+  var captchaLoaded = false;
+  function loadCaptcha(){
+    var key = dForm.getAttribute('data-sitekey');
+    if (!key || captchaLoaded) return;
+    captchaLoaded = true;
+    var box = document.getElementById('df-captcha');
+    box.innerHTML = '<div class="cf-turnstile" data-sitekey="' + key + '" data-theme="dark" data-response-field-name="token"></div>';
+    var sc = document.createElement('script');
+    sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'; sc.async = true; sc.defer = true;
+    document.head.appendChild(sc);
+  }
+  var formOpen = !!dForm.getAttribute('data-sitekey') && !!dForm.getAttribute('data-endpoint');
+  if (!formOpen){ document.getElementById('df-fields').disabled = true; document.getElementById('df-soon').hidden = false; }
+  function openForm(){
+    dForm.hidden = false; dOpen.setAttribute('aria-expanded','true');
+    if (!tsField.value) tsField.value = String(Date.now());
+    loadCaptcha();
+  }
+  dOpen.addEventListener('click', function(){ openForm(); dForm.elements['name'].focus(); });
+  if (location.hash === '#demo-form') openForm();
+  dForm.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if (!formOpen) return;
+    if (!dForm.checkValidity()){ dForm.reportValidity(); return; }
+    var endpoint = dForm.getAttribute('data-endpoint');
+    var f = dForm.elements, body = {
+      name: f['name'].value, company: f['company'].value, fleet: f['fleet'].value,
+      best_time: f['best_time'].value, email: f['email'].value, phone: f['phone'].value,
+      website: f['website'].value, ts: f['ts'].value,
+      token: (f['token'] && f['token'].value) || ''
+    };
+    var btn = dForm.querySelector('button[type=submit]'); btn.disabled = true;
+    dStatus.textContent = 'Sending…';
+    fetch(endpoint, {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)})
+      .then(function(r){ return r.json().catch(function(){ return {ok:false}; }).then(function(j){ return r.ok && j.ok; }); })
+      .then(function(ok){
+        if (ok){ dForm.reset(); dStatus.textContent = 'Thanks. We got your request and will reach out at the time you picked.'; }
+        else { btn.disabled = false; dStatus.textContent = 'That didn\'t go through. Please check the fields and the spam check, then try again.'; if (window.turnstile) window.turnstile.reset(); }
+      })
+      .catch(function(){ btn.disabled = false; dStatus.textContent = 'Network problem. Please try again in a minute.'; });
+  });
+
   /* header lifts once the page scrolls */
   function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > 8); }
   window.addEventListener('scroll', onScroll, {passive:true});
@@ -1110,7 +1188,7 @@ footer a:hover{color:var(--ink)}
   var targets = [];
   var wraps = document.querySelectorAll('.sitebody section:not(.hero) > .wrap');
   for (var w=0; w<wraps.length; w++){ wraps[w].classList.add('reveal'); targets.push(wraps[w]); }
-  var groups = document.querySelectorAll('.stack, .lane-steps, .roi, .sheets, .price-band, .rows');
+  var groups = document.querySelectorAll('.stack, .lane-steps, .roi, .sheets, .login-band, .rows');
   for (var g=0; g<groups.length; g++){
     var kids = groups[g].children;
     for (var k=0; k<kids.length; k++){ kids[k].classList.add('reveal'); kids[k].style.setProperty('--i', k); targets.push(kids[k]); }

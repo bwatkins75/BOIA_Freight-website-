@@ -4,6 +4,7 @@ frontend:
     build:
       commands:
         - echo "Static site - no build step"
+        - rm -rf README.md amplify.yml .gitignore backend
   artifacts:
     baseDirectory: /
     files:
